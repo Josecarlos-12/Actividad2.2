@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBulletFollow : MonoBehaviour
+public class EnemyBulletFollow : MonoBehaviour, DamageEnemy
 {
     [Header("Move")]
     [SerializeField] private GameObject player;
@@ -23,7 +23,10 @@ public class EnemyBulletFollow : MonoBehaviour
 
     public void Shot()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        if(player != null)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        }        
     }
 
     public int GetDamage()

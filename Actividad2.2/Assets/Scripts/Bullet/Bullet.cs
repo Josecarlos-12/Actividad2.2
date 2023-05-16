@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public abstract class Bullet : MonoBehaviour
 {
-    protected Rigidbody rb;
-
-    [SerializeField]
-    protected float speed;
+    [SerializeField] protected Rigidbody rb;
+    [SerializeField] protected float speed;
+    [SerializeField] protected float timeLife;
 
     protected virtual void Update()
     {
-        rb.velocity = Vector3.forward * speed;
+        rb.velocity = transform.forward * speed;
     }
 }

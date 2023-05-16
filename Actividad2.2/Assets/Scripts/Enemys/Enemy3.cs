@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy3 : MonoBehaviour
+public class Enemy3 : MonoBehaviour, DamageEnemy
 {
     [SerializeField, Header("Move")] private Transform player;
     [SerializeField] private float distanceToPlayer;
@@ -26,26 +26,30 @@ public class Enemy3 : MonoBehaviour
 
     public void Back()
     {
-        transform.LookAt(player.position);
-
-        if (Vector3.Distance(transform.position, player.position) < distanceToPlayer)
+        if(player!= null)
         {
+            transform.LookAt(player.position);
 
-            Vector3 direction = transform.position - player.position;
-            direction.Normalize();
+            if (Vector3.Distance(transform.position, player.position) < distanceToPlayer)
+            {
+
+                Vector3 direction = transform.position - player.position;
+                direction.Normalize();
 
 
-            Vector3 targetPosition = transform.position + direction * distanceToPlayer;
-            navMeshAgent.SetDestination(targetPosition);
+                Vector3 targetPosition = transform.position + direction * distanceToPlayer;
+                navMeshAgent.SetDestination(targetPosition);
 
 
-            navMeshAgent.speed = moveSpeed;
+                navMeshAgent.speed = moveSpeed;
+            }
+            else
+            {
+
+                navMeshAgent.speed = 0f;
+            }
         }
-        else
-        {
-
-            navMeshAgent.speed = 0f;
-        }
+        
     }
 
     public int GetDamage()
@@ -63,7 +67,7 @@ public class Enemy3 : MonoBehaviour
         }
     }
 
-    /*private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<DamagePlayer>() != null)
         {
@@ -81,12 +85,11 @@ public class Enemy3 : MonoBehaviour
             print(life);
         }
     }
-    */
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, distanceToPlayer);
     }
-
 
 }

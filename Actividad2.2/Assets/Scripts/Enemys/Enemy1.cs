@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
-public class Enemy1 : MonoBehaviour
+public class Enemy1 : MonoBehaviour, DamageEnemy
 {
     [Header("Move")]
     [SerializeField] private NavMeshAgent agent;
@@ -27,7 +27,6 @@ public class Enemy1 : MonoBehaviour
         {
             GoToNextPoint();
         }
-
         Shot();
     }
 
@@ -68,7 +67,7 @@ public class Enemy1 : MonoBehaviour
         return damage;
     }
 
-    /*private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<DamagePlayer>() != null)
         {
@@ -85,5 +84,5 @@ public class Enemy1 : MonoBehaviour
             ChangeLife(-collision.gameObject.GetComponent<DamagePlayer>().GetDamagePlayer());
             print(life);
         }
-    }*/
+    }
 }

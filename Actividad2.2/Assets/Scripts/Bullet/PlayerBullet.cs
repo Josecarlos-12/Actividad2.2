@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBullet : Bullet
+public class PlayerBullet : Bullet, DamagePlayer
 {
-    protected override void Update()
+    [SerializeField, Header("Damage")] private int damage;
+
+    private void Start()
     {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            rb.velocity = Vector3.forward * speed;
-        }
-        else
-        {
-            rb.velocity = Vector3.zero;
-        }
+        Destroy(gameObject, timeLife);
+    }
+
+    public int GetDamagePlayer()
+    {
+        return damage;
     }
 }

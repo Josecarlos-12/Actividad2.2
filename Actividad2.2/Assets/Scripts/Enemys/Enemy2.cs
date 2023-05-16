@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy2 : MonoBehaviour
+public class Enemy2 : MonoBehaviour, DamageEnemy
 {
     [Header("Move"), SerializeField] private NavMeshAgent agent;
     [SerializeField] private GameObject player;
@@ -25,13 +25,16 @@ public class Enemy2 : MonoBehaviour
     void Update()
     {
         Move();
-        // Shot();
+        Shot();
     }
 
     public void Move()
     {
-        agent.destination = player.transform.position;
-        transform.LookAt(player.transform.position);
+        if(player!= null)
+        {
+            agent.destination = player.transform.position;
+            transform.LookAt(player.transform.position);
+        }        
     }
 
     public void Shot()
@@ -59,7 +62,6 @@ public class Enemy2 : MonoBehaviour
         return damage;
     }
 
-    /* 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<DamagePlayer>() != null)
@@ -78,6 +80,5 @@ public class Enemy2 : MonoBehaviour
             print(life);
         }
     }
-    */
 
 }
