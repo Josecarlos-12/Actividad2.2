@@ -27,6 +27,8 @@ public class Enemy1 : MonoBehaviour
         {
             GoToNextPoint();
         }
+
+        Shot();
     }
 
     public void GoToNextPoint()
@@ -38,6 +40,17 @@ public class Enemy1 : MonoBehaviour
 
         agent.destination = points[destPoint].position;
         destPoint = (destPoint + 1) % points.Length;
+    }
+
+    public void Shot()
+    {
+        time += Time.deltaTime;
+
+        if (time >= maxTime)
+        {
+            time = 0;
+            Instantiate(bullet, shotPosition.transform.position, shotPosition.transform.rotation);
+        }
     }
 
     void ChangeLife(int value)
